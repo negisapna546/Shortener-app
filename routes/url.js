@@ -76,6 +76,8 @@ router.post('/', authenticateJWT, urlCreationLimiter, async (req, res) => {
  *     summary: Redirect to original URL
  *     description: Redirects to the original URL and logs analytics data
  *     tags: [URLs]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: alias
@@ -86,7 +88,7 @@ router.post('/', authenticateJWT, urlCreationLimiter, async (req, res) => {
  *       302:
  *         description: Redirects to original URL
  */
-router.get('/:alias', async (req, res) => {
+router.get('/:alias', authenticateJWT, async (req, res) => {
   try {
     const { alias } = req.params;
     
@@ -124,8 +126,14 @@ router.get('/:alias', async (req, res) => {
       },
       { new: true }
     ).exec();
-
-    res.redirect(longUrl);
+    if (req.headers['user-agent'].includes('Swagger') || 
+    req.headers['user-agent'].includes('Mozilla') ) {
+      
+      return res.json({ longUrl: longUrl }); // Swagger-friendly response
+    } else {
+      res.redirect(longUrl); // Normal redirect for browsers/Postman
+    }
+    
   } catch (error) {
     res.status(500).json({ error: 'Error redirecting to URL' });
   }

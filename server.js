@@ -15,7 +15,14 @@ const app = express();
 
 // Middleware
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: '*',  // Allow all origins (or specify Swagger UI origin)
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization','authorization']
+}));
+
+// Handle preflight requests
+app.options('*', cors());
 app.use(express.json());
 app.use(passport.initialize());
 
@@ -31,6 +38,20 @@ const swaggerOptions = {
     servers: [
       {
         url: process.env.BASE_URL || 'http://localhost:5000',
+      },
+    ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT', // Optional
+        },
+      },
+    },
+    security: [
+      {
+        BearerAuth: [], // Apply globally
       },
     ],
   },
