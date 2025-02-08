@@ -31,7 +31,6 @@ A scalable URL shortener service with comprehensive analytics, custom aliases, a
 
 - **Backend**: Node.js, Express
 - **Database**: MongoDB
-- **Caching**: Redis
 - **Authentication**: Passport.js, Google OAuth 2.0
 - **Analytics**: Custom implementation with MongoDB aggregation
 - **Documentation**: Swagger/OpenAPI
@@ -49,8 +48,8 @@ A scalable URL shortener service with comprehensive analytics, custom aliases, a
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/url-shortener.git
-   cd url-shortener
+   git clone https://github.com/negisapna546/Shortener-app.git
+   cd Shortener-app
    ```
 
 2. Install dependencies:
@@ -78,7 +77,7 @@ A scalable URL shortener service with comprehensive analytics, custom aliases, a
    docker-compose up -d
    ```
 
-2. The application will be available at `http://localhost:3000`
+2. The application will be available at `http://localhost:5000`
 
 ## API Documentation
 
@@ -143,7 +142,7 @@ A scalable URL shortener service with comprehensive analytics, custom aliases, a
 
 2. Access API documentation:
    ```
-   http://localhost:3000/api-docs
+   http://localhost:5000/api-docs
    ```
 
 ## Production Deployment
@@ -153,6 +152,15 @@ A scalable URL shortener service with comprehensive analytics, custom aliases, a
 3. Deploy using docker-compose or your preferred cloud service
 4. Set up monitoring and logging
 5. Configure domain and SSL certificates
+
+ 6.  Access API documentation:
+   ```
+   https://shortener-app-mj39.onrender.com/api-docs   
+   ```
+7.  Login with Google:
+   ```
+   https://shortener-app-mj39.onrender.com/api/auth/google 
+   ```
 
 ## Contributing
 
