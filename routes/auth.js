@@ -45,7 +45,7 @@ router.get(
     );
 
     // Redirect to frontend with token
-    res.redirect(`https://jwt.io#token=${token}`);
+   res.redirect(`https://jwt.io#token=${token}`);
   }
 );
 
